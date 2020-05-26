@@ -37,9 +37,7 @@ let agent = new Proxy(star, {
         if (key === 'price') {
             return 500000
         }
-        if (key === 'customPrice') {
-            return target[key];
-        }
+        return target[key];
     },
     set(target, key, val) {
         if (key === 'customPrice') {
