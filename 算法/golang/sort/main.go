@@ -93,10 +93,37 @@ func HeapSortMax(arr []int, length int) {
 		}
 	}
 }
+
+// QuickSort 快速排序
+func QuickSort(arr []int) []int {
+	len := len(arr)
+	if len <= 1 {
+		return arr
+	}
+	splitData := arr[0]
+	low := make([]int, 0, 0)
+	hight := make([]int, 0, 0)
+	mid := make([]int, 0, 0)
+	mid = append(mid, splitData)
+	for i := 1; i < len; i++ {
+		if arr[i] < splitData {
+			low = append(low, arr[i])
+		} else if arr[i] > splitData {
+			hight = append(hight, arr[i])
+		} else {
+			mid = append(mid, arr[i])
+		}
+	}
+	low, hight = QuickSort(low), QuickSort(hight)
+	result := append(append(low, mid...), hight...)
+	return result
+}
+
 func main() {
-	arr := []int{4, 9, 2, 1, 6, 7, 8}
+	arr := []int{4, 3, 9, 2, 1, 6, 7, 8, 5}
 	// fmt.Println(SelectSort(arr))
 	// fmt.Println(InsertSort(arr))
 	// fmt.Println(BubbleSort(arr))
-	fmt.Println(HeapSort(arr))
+	// fmt.Println(HeapSort(arr))
+	fmt.Println(QuickSort(arr))
 }
