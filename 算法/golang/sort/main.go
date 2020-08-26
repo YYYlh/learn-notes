@@ -119,11 +119,37 @@ func QuickSort(arr []int) []int {
 	return result
 }
 
+// OddEvenSort 奇偶排序
+func OddEvenSort(arr []int) []int {
+	len := len(arr)
+	if len <= 1 {
+		return arr
+	}
+	isSorted := false
+	for isSorted == false {
+		isSorted = true
+		for i := 0; i < len-1; i += 2 {
+			if arr[i] > arr[i+1] {
+				isSorted = false
+				arr[i], arr[i+1] = arr[i+1], arr[i]
+			}
+		}
+		for i := 1; i < len-1; i += 2 {
+			if arr[i] > arr[i+1] {
+				isSorted = false
+				arr[i], arr[i+1] = arr[i+1], arr[i]
+			}
+		}
+	}
+	return arr
+}
+
 func main() {
 	arr := []int{4, 3, 9, 2, 1, 6, 7, 8, 5}
 	// fmt.Println(SelectSort(arr))
 	// fmt.Println(InsertSort(arr))
 	// fmt.Println(BubbleSort(arr))
 	// fmt.Println(HeapSort(arr))
-	fmt.Println(QuickSort(arr))
+	// fmt.Println(QuickSort(arr))
+	fmt.Println(OddEvenSort(arr))
 }
