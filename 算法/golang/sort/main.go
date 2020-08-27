@@ -144,6 +144,49 @@ func OddEvenSort(arr []int) []int {
 	return arr
 }
 
+// MergeSort 归并排序
+func MergeSort(arr []int) []int {
+	len := len(arr)
+	if len <= 1 {
+		return arr
+	}
+	mid := len / 2
+	leftArr := MergeSort(arr[:mid])
+	rightArr := MergeSort(arr[mid:])
+	return Merge(leftArr, rightArr)
+}
+
+// Merge 归并
+func Merge(leftArr []int, rightArr []int) []int {
+	lastArr := []int{}
+	leftIndex := 0
+	rightIndex := 0
+	leftLen := len(leftArr)
+	rightLen := len(rightArr)
+	for leftIndex < leftLen && rightIndex < rightLen {
+		if rightArr[rightIndex] < leftArr[leftIndex] {
+			lastArr = append(lastArr, rightArr[rightIndex])
+			rightIndex++
+		} else if rightArr[rightIndex] > leftArr[leftIndex] {
+			lastArr = append(lastArr, leftArr[leftIndex])
+			leftIndex++
+		} else {
+			lastArr = append(lastArr, rightArr[rightIndex])
+			lastArr = append(lastArr, leftArr[leftIndex])
+			rightIndex++
+			leftIndex++
+		}
+	}
+	for leftIndex < leftLen {
+		lastArr = append(lastArr, leftArr[leftIndex])
+		leftIndex++
+	}
+	for rightIndex < rightLen {
+		lastArr = append(lastArr, rightArr[rightIndex])
+		rightIndex++
+	}
+	return lastArr
+}
 func main() {
 	arr := []int{4, 3, 9, 2, 1, 6, 7, 8, 5}
 	// fmt.Println(SelectSort(arr))
@@ -151,5 +194,6 @@ func main() {
 	// fmt.Println(BubbleSort(arr))
 	// fmt.Println(HeapSort(arr))
 	// fmt.Println(QuickSort(arr))
-	fmt.Println(OddEvenSort(arr))
+	// fmt.Println(OddEvenSort(arr))
+	fmt.Println(MergeSort(arr))
 }
