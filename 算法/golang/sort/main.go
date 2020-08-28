@@ -25,7 +25,7 @@ func SelectSort(arr []int) []int {
 // InsertSort 插入排序
 func InsertSort(arr []int) []int {
 	len := len(arr)
-	if len <= 0 {
+	if len <= 1 {
 		return arr
 	}
 	for i := 1; i < len; i++ {
@@ -187,6 +187,39 @@ func Merge(leftArr []int, rightArr []int) []int {
 	}
 	return lastArr
 }
+
+// ShellSort 希尔排序（插入排序）
+func ShellSort(arr []int) []int {
+	len := len(arr)
+	if len <= 1 {
+		return arr
+	}
+	gap := len / 2
+	for gap > 0 {
+		for i := 0; i < gap; i++ {
+			ShellInsertSort(arr, i, gap)
+			gap--
+		}
+		gap /= 2
+	}
+
+	return arr
+}
+
+// ShellInsertSort 插入排序
+func ShellInsertSort(arr []int, start int, gap int) {
+	len := len(arr)
+	for i := start + gap; i < len; i += gap {
+		temp := arr[i]
+		j := i - gap
+		for j >= 0 && arr[j] > temp {
+			arr[j+gap] = arr[j]
+			j -= gap
+		}
+		arr[j+gap] = temp
+	}
+}
+
 func main() {
 	arr := []int{4, 3, 9, 2, 1, 6, 7, 8, 5}
 	// fmt.Println(SelectSort(arr))
@@ -195,5 +228,6 @@ func main() {
 	// fmt.Println(HeapSort(arr))
 	// fmt.Println(QuickSort(arr))
 	// fmt.Println(OddEvenSort(arr))
-	fmt.Println(MergeSort(arr))
+	// fmt.Println(MergeSort(arr))
+	fmt.Println(ShellSort(arr))
 }
