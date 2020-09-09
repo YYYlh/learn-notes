@@ -14,18 +14,7 @@
 * 输出：7 -> 0 -> 8
 * 原因：342 + 465 = 807
  */
- 
-
-
-
-class ListNode {
-    val: number
-    next: ListNode | null
-    constructor(val?: number, next?: ListNode | null) {
-        this.val = (val === undefined ? 0 : val)
-        this.next = (next === undefined ? null : next)
-    }
-}
+import ListNode from './ListNode'
 
 let l1 = new ListNode(2, new ListNode(4, new ListNode(3)))
 let l2 = new ListNode(5, new ListNode(6, new ListNode(4)))
