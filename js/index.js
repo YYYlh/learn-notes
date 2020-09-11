@@ -30,7 +30,7 @@ function next() {
     step = (step + 1) % 3
     // * 相当于 
     // step++
-    // if (step > 3) step = 0
+    // if (step === 3) step = 0
 }
 next()
 next()
