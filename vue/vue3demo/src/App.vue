@@ -1,39 +1,11 @@
 <template>
-  <input type="text" v-model="message" /><button @click="add">添加</button>
-  <ul>
-    <li v-for="item in state.todoList" :key="item.id">{{ item.message }}</li>
-  </ul>
+  <h1>vue3全家桶学习</h1>
+  <router-link to="/todo">todo（组合api初试）</router-link>
+  <router-view></router-view>
 </template>
 
 <script>
-import { ref, reactive } from "vue";
 export default {
-  name: "App",
-  setup() {
-    return {
-      ...todo()
-    };
-  },
+  name: "App"
 };
-
-// 组合式api 将数据与逻辑处理封装到一个函数内
-function todo() {
-  const message = ref("");
-  const state = reactive({
-    todoList: [
-      {
-        id: 1,
-        message: "你好",
-      },
-    ],
-  });
-  function add() {
-    state.todoList.push({
-      id: state.todoList.length + 1,
-      message: message.value,
-    });
-    message.value = "";
-  }
-  return { message, state, add };
-}
 </script>
