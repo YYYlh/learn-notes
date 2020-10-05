@@ -2,6 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
     {
+        path: '/toRefs',
+        component: _ => import('../views/toRefs/index.vue')
+    },
+    {
         path: '/todo',
         component: _ => import('../views/todoList/index.vue')
     }
