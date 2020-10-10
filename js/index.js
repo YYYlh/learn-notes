@@ -61,8 +61,13 @@ func1('1')
 console.log('-------------------------------------8------------------------------------------')
 
 // * 使用 toLocaleString 方法可以将数字转化为金额的显示方式（千分符）
-let price = 100000
-console.log(price.toLocaleString()) // 100,000
+{
+    let price = 1000000000
+    console.log(price.toLocaleString()) // 100,000
+    // * 正则
+    let reg = /\B(?=(\d{3})+(?!\d))/g
+    console.log(price.toString().replace(reg, ','))
+}
 
 console.log('-------------------------------------9------------------------------------------')
 
