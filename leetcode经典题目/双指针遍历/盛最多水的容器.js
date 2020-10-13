@@ -14,7 +14,7 @@ function maxArea(height) {
         } else {
             r--
         }
-    }     
+    }
     return result
 }
 
