@@ -46,8 +46,8 @@ function getCalendar(year = currentYear, month = currentMonth) {
         if ((i + day) % 7 === 0) {
             temp = i
             calendar.push([...item]) 
+            item.length = 0
         }
-        item.length = item.length % 7
     }
     let nextDay = 1
     if (item.length !== 0) {
@@ -68,5 +68,5 @@ function getCalendar(year = currentYear, month = currentMonth) {
     }
     return calendar
 }
-console.log(getCalendar(2020, 9))
+console.log(getCalendar(2020, 10))
 // export default getCalendar
