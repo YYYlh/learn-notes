@@ -30,7 +30,7 @@ function getCalendar(year = currentYear, month = currentMonth) {
                 year: tempYear,
                 month: tempMonth,
                 date: preDate,
-                today: false
+                today: (preDate === new Date().getDate() && tempYear === currentYear && tempMonth === currentMonth)
             })
             preDate--
         }
@@ -59,7 +59,7 @@ function getCalendar(year = currentYear, month = currentMonth) {
                     year: month === 12 ? year + 1 : year,
                     month: month === 12 ? 1 : month + 1,
                     date: nextDay,
-                    today: false
+                    today: (nextDay === new Date().getDate() && year === currentYear && month === currentMonth)
                 })
                 nextDay++
             }
