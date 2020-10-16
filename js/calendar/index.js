@@ -1,5 +1,6 @@
 let currentYear = new Date().getFullYear()
 let currentMonth = new Date().getMonth() + 1
+let currentDate = new Date().getDate()
 
 // 获取每年每个月的天数
 function getMonthDate(year,month) {
@@ -8,6 +9,10 @@ function getMonthDate(year,month) {
 // 获取每月一号的是周几
 function getFirstDay(year, month) {
     return new Date(year, month - 1, 1).getDay()
+}
+
+function isToday(year, month, date) {
+    return year === currentYear && month === currentMonth && date === currentDate
 }
 
 function getCalendar(year = currentYear, month = currentMonth) {
@@ -30,7 +35,7 @@ function getCalendar(year = currentYear, month = currentMonth) {
                 year: tempYear,
                 month: tempMonth,
                 date: preDate,
-                today: (preDate === new Date().getDate() && tempYear === currentYear && tempMonth === currentMonth)
+                today: isToday(tempYear, tempMonth, preDate)
             })
             preDate--
         }
@@ -41,7 +46,7 @@ function getCalendar(year = currentYear, month = currentMonth) {
             year: year,
             month: month,
             date: i,
-            today: (i === new Date().getDate() && year === currentYear && month === currentMonth)
+            today: isToday(year, month, i)
         })
         if ((i + day) % 7 === 0) {
             temp = i
@@ -49,19 +54,27 @@ function getCalendar(year = currentYear, month = currentMonth) {
             item.length = 0
         }
     }
-    let nextDay = 1
+    let nextDate = 1
     if (item.length !== 0) {
         for (let i = 0; i < 7; i++) {
             if (temp < date) {
                 temp++
             } else {
+                let nextYear, nextMonth
+                if (month === 12) {
+                    nextYear = year + 1
+                    nextMonth = 1
+                } else {
+                    nextYear = year
+                    nextMonth = month + 1
+                }
                 item.push({
-                    year: month === 12 ? year + 1 : year,
-                    month: month === 12 ? 1 : month + 1,
-                    date: nextDay,
-                    today: (nextDay === new Date().getDate() && year === currentYear && month === currentMonth)
+                    year: nextYear,
+                    month: nextMonth,
+                    date: nextDate,
+                    today: isToday(nextYear, nextMonth, nextDate)
                 })
-                nextDay++
+                nextDate++
             }
         }
         calendar.push(item)
