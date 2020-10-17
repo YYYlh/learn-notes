@@ -1,0 +1,29 @@
+.content {
+    background: black; 
+    color: white;
+    .style1 {
+        background: #a5a5a5;
+    }
+    .style2 {
+        background: #333333;
+    }
+    .style3 {
+        background: #f2a23c;
+    }
+    @mixin common_item {
+        display: inline-block;
+        margin: 0 0 4% 4%;
+        height: 0px;
+        border-radius: 100px;
+        text-align: center;
+        padding-bottom: 20%;  
+    }
+    .item {
+        @include common_item();
+        width: 20%;
+    }
+    .zero {
+        @include common_item();
+        width: 44%;
+    }
+}
