@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { View, Text } from '@tarojs/components'
 import './index.scss'
-import { string } from 'prop-types'
 
 export default function () {
   
   let [digit ,setDigit] = useState('0')
-  let [stack, updateStack] = useState([])
+  let [stack, updateStack] = useState([''])
   let [result, updateResult] = useState('0')
   let [operatorHover, updateOperatorHover] = useState(false)
   
@@ -60,7 +59,7 @@ export default function () {
     }
   }
   const compute = (l: number, o: string, r: number): number => {
-    let result: number
+    let result: number = 0
     switch (o) {
       case '÷':
         result = l / r
