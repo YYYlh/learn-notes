@@ -1,6 +1,10 @@
 .content {
-    background: black; 
+    background: black;
+    height: 100%;
     color: white;
+    .result-content {
+        height: 30%;
+    }
     .style1 {
         background: #a5a5a5;
     }
@@ -16,11 +20,15 @@
         height: 0px;
         border-radius: 100px;
         text-align: center;
-        padding-bottom: 20%;  
+        padding-bottom: 20%;
+        span {
+            display: inline-block;
+            transform: translateY(50%);
+        }
     }
     .item {
         @include common_item();
-        width: 20%;
+        width: 20%;  
     }
     .zero {
         @include common_item();
