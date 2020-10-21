@@ -8,6 +8,10 @@ const routes = [
     {
         path: '/todo',
         component: _ => import('../views/todoList/index.vue')
+    },
+    {
+        path: '/functionComponent',
+        component: _ => import('../views/functionComponent/index.vue')
     }
 ]
 
