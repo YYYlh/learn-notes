@@ -43,7 +43,6 @@ func (c *Context) JSON(code int, obj interface{}) {
 	c.SetHeader("Content-Type", "application/json")
 	c.Status(code)
 	encoder := json.NewEncoder(c.Writer)
-	fmt.Println(encoder)
 	if err := encoder.Encode(obj); err != nil {
 		http.Error(c.Writer, err.Error(), 500)
 	}
