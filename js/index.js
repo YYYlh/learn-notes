@@ -109,3 +109,37 @@ console.log('-------------------------------------14----------------------------
     const isArray = isType('Array')
     console.log(isArray([]))
 }
+console.log('-------------------------------------15------------------------------------------')
+// 优雅处理async/await中的错误捕获问题
+{
+    function get(a, b, c) {
+        console.log(a, b, c);
+        return new Promise((reslove, reject) => {
+            reject('error')
+        })
+    }
+    // 传统处理错误捕获问题（如果有多个await就要写多个trycatch）
+    async function fn() {
+        try {
+            const res = await get()
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    fn()
+    // 可以事先封装一个抛出异常的函数
+    async function errorCaptured(asyncFn, ...args) {
+        try {
+            const res = await asyncFn(...args)
+            return [res, null]
+        } catch (error) {
+            return [null, error]
+        }
+    }
+    async function fn1() {
+        let [res, error] = await errorCaptured(get, 1,2,3)
+        console.log('res: ', res)
+        console.log('error: ', error)   
+    }
+    fn1()
+}
