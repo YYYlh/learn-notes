@@ -126,11 +126,12 @@ console.log('-------------------------------------15----------------------------
             console.log(error)
         }
     }
-    fn()
+    // fn()
     // 可以事先封装一个抛出异常的函数
     async function errorCaptured(asyncFn, ...args) {
         try {
             const res = await asyncFn(...args)
+            console.log(1);
             return [res, null]
         } catch (error) {
             return [null, error]
@@ -141,5 +142,17 @@ console.log('-------------------------------------15----------------------------
         console.log('res: ', res)
         console.log('error: ', error)   
     }
-    fn1()
+    // fn1()
+}
+console.log('-------------------------------------16------------------------------------------')
+{
+    let a = {
+        n: 0,
+        valueOf() {
+            return ++this.n
+        }
+    }
+    if (a == 1 && a == 2 && a == 3) {
+        console.log('haha');
+    }
 }
