@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            height: 300px;
+            width: 300px;
+            border: 1px solid black;
+        }
+        .normal {
+            white-space: normal;
+        }
+        .nowrap {
+            white-space: nowrap;
+        }
+        .pre {
+            white-space: pre;
+            
+        }
+        .pre-wrap {
+            white-space: pre-wrap;
+        }
+        .pre-line {
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+    <h4>默认情况下自动换行（normal）</h4>
+    <div class="box normal">
+        Hi&nbsp;&nbsp;,
+        This   is a incomprehensibilities long word.
+        <br>
+        你好&nbsp;&nbsp;，
+        这   是一个不可思议的长单词
+    </div>
+    <h4>不换行（nowrap）</h4>
+    <div class="box nowrap">
+        Hi&nbsp;&nbsp;,
+        This   is a incomprehensibilities long word.
+        <br>
+        你好&nbsp;&nbsp;，
+        这   是一个不可思议的长单词
+    </div>
+    <h4>保留空格和换行（pre）</h4>
+    <div class="box pre">
+        Hi&nbsp;&nbsp;,
+        This   is a incomprehensibilities long word.
+        <br>
+        你好&nbsp;&nbsp;，
+        这   是一个不可思议的长单词
+    </div>
+    <h4>保留空格和换行且自动换行（pre-wrap）</h4>
+    <div class="box pre-wrap">
+        Hi&nbsp;&nbsp;,
+        This   is a incomprehensibilities long word.
+        <br>
+        你好&nbsp;&nbsp;，
+        这   是一个不可思议的长单词
+    </div>
+    <h4>保留换行且自动换行（pre-line）</h4>
+    <div class="box pre-line">
+        Hi&nbsp;&nbsp;,
+        This   is a incomprehensibilities long word.
+        <br>
+        你好&nbsp;&nbsp;，
+        这   是一个不可思议的长单词
+    </div>
+</body>
+</html>
