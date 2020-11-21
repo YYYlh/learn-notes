@@ -11,9 +11,16 @@ let b = {
 // * call
 // a.getName.call(b, '张三', '李四')
 Function.prototype.myCall = function(context = window, ...args) {
-    context.func = this
-    context.func(...args)
-    delete context.func
+    if (context == null) {
+        context = window
+    } else {
+        context = Object(context)
+    }
+    const specialMethod = Symbol('specialMethod')
+    context[specialMethod] = this
+    const result = context[specialMethod](...args)
+    delete context[specialMethod]
+    return result
 }
 // a.getName.myCall(b, '张三', '李四')
 
@@ -27,7 +34,15 @@ Function.prototype.myApply = function(context = window, args) {
     context.func(...args)
     delete context.func
 }
-a.getName.myApply(b, [1, 2])
+// a.getName.myApply(b, [1, 2])
 
 // * bind
-// 没看懂 先放着
+Function.prototype.myBind = function(context, ...args) {
+    const thisFn = this
+    let funcForBind = function(...secondArgs) {
+        return thisFn.call(context, ...args, ...secondArgs)
+    }
+    return funcForBind
+}
+
+a.getName.myBind(b)('刘浩')
