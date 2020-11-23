@@ -200,3 +200,15 @@ console.log('-------------------------------------20----------------------------
     }
     console.log(new Map(Object.entries(o)))
 }
+console.log('-------------------------------------21------------------------------------------')
+// 数组的some方法(返回一个布尔值，如果数组中有一项或多项通过了回调函数的返回值则返回true反之返回flase)
+{
+    let arr = [1,3,4,5,6]
+    console.log(arr.some(item => item > 5))
+    console.log(arr.some(item => item > 7))
+    // 如果数组中的项被删除或没有赋值则改数组项不会被调用
+    let arr1 = new Array(4)
+    arr1.some((item) => {
+        console.log(item)
+    })
+}
