@@ -212,3 +212,29 @@ console.log('-------------------------------------21----------------------------
         console.log(item)
     })
 }
+console.log('-------------------------------------22------------------------------------------')
+// 数组的reduce方法（回调函数里的第一个参数为上一次遍历回调函数的返回值，如果没有第二个参数有默认值则第一次遍历时就是默认值，否则是数组的第一项）
+// 第二个参数是当前遍历的值
+{
+    const arr  = [
+        {
+            username:    'makai',
+            displayname: '馆长',
+            email:       'guanzhang@coffe1891.com'
+        },
+        {
+            username:    'xiaoer',
+            displayname: '小二',
+            email:       'xiaoer@coffe1891.com'
+        },
+        {
+            username:    'zhanggui',
+            displayname: '掌柜',
+            email:       null
+        },
+    ]
+    let obj = arr.reduce((pevious, current) => {
+        return {...pevious, [current.username]: current}
+    }, {})
+    console.log(obj);
+}
