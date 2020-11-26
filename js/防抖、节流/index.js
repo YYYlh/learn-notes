@@ -6,9 +6,13 @@ function debounce(fn, wait = 100) {
     let timer = null
     return (...args) => {
         timer && clearTimeout(timer)
+        let call = !timer
         timer = setTimeout(() => {
-            fn(...args)
+            timer = null
         }, wait)
+        if (call) {
+            fn(...args)
+        }
     }
 }
 // 节流
