@@ -157,11 +157,17 @@ console.log('-------------------------------------16----------------------------
     }
 }
 console.log('-------------------------------------17------------------------------------------')
-// 使用结构赋值删除对象中的属性
+// 使用spread/rest(...)操作符删除对象中的属性
 {
+    /* function removeProperty(prop) {
+        return function({[prop]: _, ...reset}) {
+            return reset
+        }
+    } */
+    const removeProperty = prop => ({[prop]: _, ...reset}) => reset
     let a = {b: 1, c: 2, d: 3}
-    let {b, c, ...o} = a
-    console.log(o);
+    const removeB = removeProperty('b')
+    console.log(removeB(a))
 }
 console.log('-------------------------------------18------------------------------------------')
 // 判断两边的值是否相等（作用相当于 ===）
@@ -245,3 +251,4 @@ console.log('-------------------------------------22----------------------------
     console.log(num)
     console.log(Number(10n / 3n))
 }
+console.log('-------------------------------------23------------------------------------------')
