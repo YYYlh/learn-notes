@@ -12,5 +12,20 @@ function maxSubArray(nums) {
     }
     return Math.max(...nums)
 }
+function maxSubArray1(nums) {
+    let maxNum = -Infinity
+    let sum = 0
+    for (let i = 0, len = nums.length; i < len; i++) {
+        sum += nums[i]
+        if (sum < nums[i]) {
+            sum = nums[i]
+        }
+        if (sum > maxNum) {
+            maxNum = sum
+        }
+    }
+    return maxNum
+}
 
 console.log(maxSubArray([-2,1,-3,4,-1,2,1,-5,4]))
+console.log(maxSubArray1([-2,1,-3,4,-1,2,1,-5,4]))
