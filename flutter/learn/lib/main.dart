@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
-main(List<String> args) {
-  runApp(App());
-}
+void main() => runApp(MyApp());
 
-class App extends StatelessWidget {
-  const App({Key key}) : super(key: key);
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'lean',
-      theme: ThemeData(primaryColor: Colors.blue),
-      home: HomePage(),
+      title: '路由',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomePage(),
+        'newRoute': (context) => NewRoute(
+              id: ModalRoute.of(context).settings.arguments,
+            )
+      },
+      // onGenerateRoute: (settings) {},
     );
   }
 }
@@ -24,44 +26,58 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter实战'),
+        title: Text('2-2路由管理'),
       ),
-      body: Counter(),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('我是首页'),
+            FlatButton(
+              child: Text('open new route'),
+              textColor: Colors.blue,
+              onPressed: () async {
+                // var result = await Navigator.of(context).push(MaterialPageRoute(
+                //   builder: (context) => NewRoute(
+                //     id: '我是参数',
+                //   ),
+                // ));
+                var result = await Navigator.pushNamed(context, 'newRoute',
+                    arguments: '我是参数');
+                print(result);
+              },
+            )
+          ],
+        ),
+      ),
     );
   }
 }
 
-class Counter extends StatefulWidget {
-  Counter({Key key}) : super(key: key);
-
-  @override
-  _CounterState createState() => _CounterState();
-}
-
-class _CounterState extends State<Counter> {
-  int _count = 0;
-  void _incrementCounter() {
-    setState(() {
-      _count++;
-    });
-  }
+class NewRoute extends StatelessWidget {
+  final String id;
+  const NewRoute({Key key, @required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text('You have pushed the button this many times:'),
-          Text(
-            '$_count',
-            style: Theme.of(context).textTheme.headline4,
-          ),
-          RaisedButton(
-            child: Text('+'),
-            onPressed: _incrementCounter,
-          )
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('new Router Page'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('我是新的路由页面'),
+            Text('这是从上一个页面传递过来的参数：$id'),
+            RaisedButton(
+              child: Text('返回上一个页面'),
+              onPressed: () {
+                Navigator.of(context).pop('传递给上一个页面的参数');
+              },
+            )
+          ],
+        ),
       ),
     );
   }
