@@ -1,9 +1,17 @@
 var express = require('express');
-
-var indexRouter = require('./routes/index');
+const bodyParse = require('body-parser')
+var indexRouter = require('./routes/index')
+const { assetsPath } = require('./global')
 
 var app = express();
 
+app.all('*', function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Methods', '*');
+  next();
+});
+app.use(express.static(assetsPath))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

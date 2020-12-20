@@ -6,6 +6,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "axios": "^0.21.0",
     "spark-md5": "^3.0.1",
     "vue": "^3.0.0-rc.1"
   },
