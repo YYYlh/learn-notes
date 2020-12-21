@@ -37,7 +37,7 @@ function uploadFileModule() {
     spark.append(buffer)
     hash = spark.end()
     let suffix = /\.([0-9a-zA-Z]+)$/i.exec(file.name)[1]
-    chunkList.value = getFileSliceArr(file, suffix)
+    chunkList.value = getFileSlice(file, suffix)
   }
   // 进行切片
   function getFileSliceArr(file, suffix) {
@@ -58,7 +58,7 @@ function uploadFileModule() {
   }
   async function upload() {
     let requestList = []
-    chunkList.value.map((item, index) => {
+    chunkList.value.forEach((item, index) => {
       let fn = () => {
         const formData = new FormData()
         formData.append('chunk', item.chunk)
