@@ -7,118 +7,57 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      // home: Scaffold(
-      //     appBar: AppBar(
-      //       title: Text('3-1 Widget简介'),
-      //     ),
-      //     body: Echo(text: 'hello world')),
-      home: Counter(),
-    );
-  }
-}
-
-class Echo extends StatelessWidget {
-  final String text;
-  const Echo({Key key, @required this.text}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    // 获取上一级的widget
-    Scaffold scaffold = context.findAncestorWidgetOfExactType<Scaffold>();
-    return (scaffold.appBar as AppBar).title;
-  }
-}
-
-class Counter extends StatefulWidget {
-  final int initValue;
-  Counter({Key key, this.initValue: 0}) : super(key: key);
-
-  @override
-  _CounterState createState() => _CounterState();
-}
-
-class _CounterState extends State<Counter> {
-  int _counter;
-  @override
-  void initState() {
-    super.initState();
-    _counter = widget.initValue;
-    print('initState');
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    print('didChangeDependencies');
-  }
-
-  // 在热重载时会被调用
-  @override
-  void reassemble() {
-    super.reassemble();
-    print('reassemble');
-  }
-
-  @override
-  void didUpdateWidget(Counter oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    print('didUpdateWidget');
-  }
-
-  @override
-  void deactivate() {
-    super.deactivate();
-    print('deactivate');
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    print('dispose');
-  }
-
-  static GlobalKey<ScaffoldState> _globalKey = GlobalKey();
-  @override
-  Widget build(BuildContext context) {
-    print('build');
-    return Scaffold(
-      key: _globalKey,
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            FlatButton(
-              child: Text('$_counter'),
-              onPressed: () {
-                setState(() {
-                  _counter++;
-                });
-              },
-            ),
-            Container(
-              child: Builder(builder: (context) {
-                return RaisedButton(
-                  child: Text('显示SnackBar-context'),
-                  onPressed: () {
-                    ScaffoldState _state =
-                        context.findAncestorStateOfType<ScaffoldState>();
-                    _state.showSnackBar(SnackBar(
-                      content: Text('我是显示SnackBar'),
-                    ));
-                  },
-                );
-              }),
-            ),
-            RaisedButton(
-              child: Text('显示SnackBar-GlobalKey'),
-              onPressed: () {
-                _globalKey.currentState.showSnackBar(SnackBar(
-                  content: Text('我是显示SnackBar'),
-                ));
-              },
-            )
-          ],
-        ),
-      ),
+      home: Scaffold(
+          appBar: AppBar(
+            title: Text('3-3 文本、字体样式'),
+          ),
+          body: Column(
+            children: <Widget>[
+              Text('hello' * 16),
+              Text(
+                'hello' * 16,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              Text(
+                'hello' * 16,
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                'hello',
+                textScaleFactor: 2,
+              ),
+              Text(
+                'hello world',
+                style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 18,
+                    height: 1,
+                    background: Paint()..color = Colors.yellow,
+                    decoration: TextDecoration.underline,
+                    decorationStyle: TextDecorationStyle.dotted),
+              ),
+              Text.rich(TextSpan(children: [
+                TextSpan(text: 'Email:'),
+                TextSpan(
+                    text: '1184262331@qq.com',
+                    style: TextStyle(color: Colors.blue))
+              ])),
+              DefaultTextStyle(
+                style: TextStyle(color: Colors.red),
+                child: Column(
+                  children: <Widget>[
+                    Text('我继承了默认样式'),
+                    Text('我也继承了默认样式'),
+                    Text(
+                      '我有自己的样式哦',
+                      style: TextStyle(color: Colors.green),
+                    )
+                  ],
+                ),
+              )
+            ],
+          )),
     );
   }
 }
