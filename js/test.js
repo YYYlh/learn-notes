@@ -11,7 +11,7 @@ for (const key in o) {
 console.timeEnd()
 
 console.time()
-Object.keys(o).forEach(key => {
+forobj(o, (key) => {
     console.log(key);
 })
 console.timeEnd()
@@ -27,3 +27,12 @@ for (let i = 0, len = arr.length; i < len; i++) {
     // console.log(i);
 }
 console.timeEnd()
+
+
+function forobj(obj, callback) {
+    try {
+        Object.keys(obj).forEach(callback)
+    } catch (error) {
+        console.error(new Error(error))
+    }
+}
