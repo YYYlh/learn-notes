@@ -1,5 +1,5 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:learn/main1-1.dart';
 
 void main() => runApp(MyApp());
 
@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      home: DemoPage2(),
+      home: DemoPage4(),
     );
   }
 }
@@ -95,6 +95,78 @@ class _DemoPage2State extends State<DemoPage2> {
                 )),
           )
         ],
+      ),
+    );
+  }
+}
+
+class DemoPage3 extends StatefulWidget {
+  DemoPage3({Key key}) : super(key: key);
+
+  @override
+  _DemoPage3State createState() => _DemoPage3State();
+}
+
+class _DemoPage3State extends State<DemoPage3> {
+  double _width = 200;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('缩放'),
+      ),
+      body: Center(
+        child: GestureDetector(
+          child: Image.asset('assets/image/kda1.jpg', width: _width),
+          onScaleUpdate: (ScaleUpdateDetails e) {
+            setState(() {
+              _width = 200 * e.scale.clamp(0.8, 100);
+            });
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class DemoPage4 extends StatefulWidget {
+  DemoPage4({Key key}) : super(key: key);
+
+  @override
+  _DemoPage4State createState() => _DemoPage4State();
+}
+
+class _DemoPage4State extends State<DemoPage4> {
+  TapGestureRecognizer _recognizer = new TapGestureRecognizer();
+  bool _toggle = false;
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _recognizer.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('GestureRecognizer'),
+      ),
+      // TextSpan 不是一个widget
+      body: Center(
+        child: Text.rich(TextSpan(children: [
+          TextSpan(text: '你好世界'),
+          TextSpan(
+              text: '点我变色',
+              style: TextStyle(color: _toggle ? Colors.red : Colors.blue),
+              recognizer: _recognizer
+                ..onTap = () {
+                  setState(() {
+                    _toggle = !_toggle;
+                  });
+                })
+        ])),
       ),
     );
   }
