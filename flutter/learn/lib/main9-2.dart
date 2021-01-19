@@ -54,6 +54,12 @@ class _DemoPage1State extends State<DemoPage1>
         CurvedAnimation(parent: animationController, curve: Curves.bounceIn);
     animation = new Tween(begin: 0.0, end: 300.0).animate(animation);
     animationController.forward();
+    animation.addStatusListener((status) {
+      if (status == AnimationStatus.completed)
+        animationController.reverse();
+      else if (status == AnimationStatus.dismissed)
+        animationController.forward();
+    });
   }
 
   @override
