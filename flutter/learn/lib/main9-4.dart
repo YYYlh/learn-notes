@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
       title: 'Material App',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('9-2 Hero动画'),
+          title: Text('9-4 Hero动画'),
         ),
         body: Page1(),
       ),
