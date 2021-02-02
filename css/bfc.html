@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" container="width=device-width, initial-scale=1.0">
+    <title>BFC</title>
+    <style>
+        .bfc {
+            overflow: hidden;
+        }
+        .container {
+            background-color: grey;
+        }
+        .container img {
+            float: left;
+            overflow: hidden;
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        BFC block formatting context 块级格式上下文 形成独立的块状区域，保证元素渲染不影响外界
+     -->
+    <div class="container bfc">
+        <img src="../images//910131.jpg" alt="">
+        <p class="bfc">这是一段描述</p>
+    </div>
+</body>
+
+</html>
