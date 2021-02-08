@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" container="width=device-width, initial-scale=1.0">
+    <title>圣杯布局</title>
+    <style>
+        .clearfix {
+            clear: both;
+        }
+        .coulmn {
+            float: left;
+        }
+        .header {
+            background: #ddd;
+        }
+        .footer {
+            background: #ccc;
+        }
+        .content {
+            --left: 300px;
+            --right: 200px;
+            padding-left: var(--left);
+            padding-right: var(--right);
+        }
+        .content .left {
+            width: 300px;
+            background: orange; 
+            margin-left: calc(-100% - var(--left));  
+            /* margin-left 设置百分比是根据父级元素的宽度，这个宽度不包括padding; */
+        }
+        .content .center {
+            width: 100%;
+            background: yellowgreen;
+        }
+        .content .right {
+            width: var(--right);
+            background: red;
+            margin-right: calc(0px - var(--right));
+        }
+    </style>
+</head>
+
+<body> 
+    <div class="header">header</div>
+    <div class="content">
+        <div class="center coulmn">center</div>
+        <div class="left coulmn">left</div>
+        <div class="right coulmn">right</div>
+    </div>
+    <div class="footer clearfix">footer</div>  
+</body>
+
+</html>
