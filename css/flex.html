@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" container="width=device-width, initial-scale=1.0">
+    <title>flex</title>
+    <style>
+        .box {
+            display: flex;
+            justify-content: space-between;
+            width: 150px;
+            height: 150px;
+            padding: 15px;
+            box-sizing: border-box;
+            border: 5px solid #ccc;
+            border-radius: 10px;
+        }
+        .box .item {
+            width: 20px;
+            height: 20px;
+            background: #666;
+            border-radius: 50%;
+        }
+        .item:nth-child(2) {
+            /* align-self 子元素在交叉轴上的对齐方式 */
+            align-self: center;
+        }
+        .item:nth-child(3) {
+            align-self: flex-end;
+        }
+    </style>
+</head>
+
+<body> 
+    <div class="box">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+</body>
+
+</html>
