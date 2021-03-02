@@ -27,7 +27,7 @@ function isHappy(n: number): boolean {
         fast = squareSum(fast)
         if (fast === 1) return true
     } while (fast !== slow)
-    return fast === 1 ? true : false
+    return fast === 1
 }
 
 function squareSum(n: number): number {
