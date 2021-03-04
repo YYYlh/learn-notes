@@ -3,6 +3,8 @@ function slice(array: Array<any>, start: number, end: number): Array<any> {
     if (start < 0) {
         start = -start > length ? 0 : (length + start)
     }
+
+    end = end > length ? length : end
     if (end < 0) {
         end += length
     }
@@ -16,6 +18,4 @@ function slice(array: Array<any>, start: number, end: number): Array<any> {
     return result
 }
 
-// test
-let array = [1,2,3,4,5]
-console.log(slice(array, 1, -2));
+export default slice
