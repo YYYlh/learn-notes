@@ -7,5 +7,5 @@ function * func () {
 
 let fn = func()
 
-fn.next()
-fn.next(3)
+console.log(fn.next());
+// console.log(fn.next(3));

@@ -15,3 +15,4 @@ Reflect.defineProperty(obj, 'name', {
 obj.name = '张三'
 console.log(obj);
 console.log(Object.keys(obj))
+
