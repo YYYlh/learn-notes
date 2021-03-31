@@ -36,6 +36,7 @@ class Emitter {
 
 const emitter = new Emitter(5)
 async function iterator() {
+    console.log('执行');
     for await (const i of emitter) {
         console.log(i);
     }
@@ -43,3 +44,29 @@ async function iterator() {
 
 iterator()
 
+let initial = ['bar']
+let array = ['foo']
+console.log(array[Symbol.isConcatSpreadable])
+console.log(initial.concat(array))
+array[Symbol.isConcatSpreadable] = true
+console.log(initial.concat(array))
+
+let arrayLikeObj = {0: 'baz', length: 1}
+console.log(initial.concat(arrayLikeObj))
+arrayLikeObj[Symbol.isConcatSpreadable] = true
+console.log(initial.concat(arrayLikeObj))
+
+let otherObj = new Set().add('xun')
+otherObj[Symbol.isConcatSpreadable] = true
+console.log(initial.concat(otherObj)) // 会被忽略
+
+
+class Foo {
+    constructor() {
+        // 使用Object.prototype.toString时 会返回Symbol.toStringTag的值
+        this[Symbol.toStringTag] = 'Foo'
+    }
+}
+
+let foo = new Foo()
+console.log(foo.toString());
