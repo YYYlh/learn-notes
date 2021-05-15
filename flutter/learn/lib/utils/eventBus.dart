@@ -11,6 +11,7 @@ class EventBus {
     if (eventName == null || f == null) {
       return;
     }
+    // ignore: deprecated_member_use
     _eamp[eventName] ??= new List<EventCallback>();
     _eamp[eventName].add(f);
   }
