@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script type="module">
+    import Dep from './Dep.js'
+
+    function defineReactive(data, key, val) {
+        let dep = new Dep()
+
+        Object.defineProperty(data, key, {
+            enumerable: true,
+            configurable: true,
+            get() {
+                console.log(`有一个对象中的${key}被使用了`);
+                // 在使用该数据时数据添加到依赖中
+                dep.depend()
+                return val
+            },
+            set(newVal) {
+                if (newVal === val) {
+                    return
+                }
+                // 数据发生改变，通知依赖更新
+                dep.notify()
+                val = newVal
+            }
+        })
+    }
+
+    let my = {
+        name: 'liuhao',
+        age: 23
+    }
+
+    Object.keys(my).forEach(key => {
+        defineReactive(my, key, my[key])
+    })
+
+    const a = my.name
+</script>
+</body>
+</html>

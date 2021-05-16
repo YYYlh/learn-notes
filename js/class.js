@@ -44,3 +44,5 @@ const d = new D()
 d.a()
 d.b()
 d.c()
+
+console.log(Object.getPrototypeOf(d).constructor === D)
