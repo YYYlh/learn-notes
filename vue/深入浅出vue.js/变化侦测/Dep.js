@@ -12,10 +12,11 @@ export default class Dep {
     }
 
     depend() {
-        // window.target中保存的是依赖
+        // window.target中保存的是依赖（watcher）
         if (window.target) {
             this.addSub(window.target)
         }
+        console.log(this.subs);
     }
 
     notify() {
