@@ -2,6 +2,8 @@ export default class Watcher {
     constructor(vm, expOrFn, cb) {
         this.vm = vm
         this.cb = cb
+        this.deps = []
+        this.depIds = new Set()
         this.getter = parsePath(expOrFn)
         this.value = this.get()
     }
@@ -17,6 +19,14 @@ export default class Watcher {
         const oldValue = this.value
         this.value = this.get()
         this.cb.call(this.vm, this.value, oldValue)
+    }
+
+    addDep(dep) {
+        const uid = dep.uid
+        if (!this.depIds.has(uid)) {
+            this.deps.push(dep)
+            dep.addSub(this)
+        }
     }
 }
 

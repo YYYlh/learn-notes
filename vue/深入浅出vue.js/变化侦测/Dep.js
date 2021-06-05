@@ -1,5 +1,8 @@
+let uid = 0
+
 export default class Dep {
     constructor() {
+        this.uid = uid++
         this.subs = []
     }
 
@@ -14,9 +17,8 @@ export default class Dep {
     depend() {
         // window.target中保存的是依赖（watcher）
         if (window.target) {
-            this.addSub(window.target)
+            window.target.addDep(this)
         }
-        console.log(this.subs);
     }
 
     notify() {

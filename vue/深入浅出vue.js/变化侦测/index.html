@@ -8,47 +8,28 @@
 </head>
 <body>
 <script type="module">
-    import Dep from './Dep.js'
     import Watcher from './Watcher.js'
+    import Observer from './Observer.js'
 
     let vue = {
         data: {
-            name: '刘浩'
+            my: {
+                name: '张三',
+                wife: {
+                    name: '李四'
+                }
+            }
         }
     }
-    Object.keys(vue.data).forEach(key => {
-        defineReactive(vue.data, key, vue.data[key])
+    new Observer(vue.data)
+
+    const w2 = new Watcher(vue, 'my.wife.name', (n, o) => {
+        console.log(n, o);
     })
 
-    const w1 = new Watcher(vue, 'name', (n, o) => {
-        console.log(n);
-        console.log(o);
-    })
+    vue.data.my.wife.name = '张xx'
 
-    vue.data.name = '张'
-
-    function defineReactive(data, key, val) {
-        let dep = new Dep()
-
-        Object.defineProperty(data, key, {
-            enumerable: true,
-            configurable: true,
-            get() {
-                console.log(`有一个对象中的${key}被使用了`);
-                // 在使用该数据时数据添加到依赖中
-                dep.depend()
-                return val
-            },
-            set(newVal) {
-                if (newVal === val) {
-                    return
-                }
-                val = newVal
-                // 数据发生改变，通知依赖更新
-                dep.notify()
-            }
-        })
-    }
+    
 </script>
 </body>
 </html>
