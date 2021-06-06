@@ -4,7 +4,11 @@ export default class Watcher {
         this.cb = cb
         this.deps = []
         this.depIds = new Set()
-        this.getter = parsePath(expOrFn)
+        if(typeof expOrFn === 'function') {
+            this.getter = expOrFn
+        } else {
+            this.getter = parsePath(expOrFn)
+        }
         this.value = this.get()
     }
 
@@ -25,6 +29,7 @@ export default class Watcher {
         const uid = dep.uid
         if (!this.depIds.has(uid)) {
             this.deps.push(dep)
+            this.depIds.add(uid)
             dep.addSub(this)
         }
     }

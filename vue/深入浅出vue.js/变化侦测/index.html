@@ -13,22 +13,15 @@
 
     let vue = {
         data: {
-            my: {
-                name: '张三',
-                wife: {
-                    name: '李四'
-                }
-            }
+            car: ['五菱宏光']
         }
     }
     new Observer(vue.data)
 
-    const w2 = new Watcher(vue, 'my.wife.name', (n, o) => {
+    const w2 = new Watcher(vue, 'car', (n, o) => {
         console.log(n, o);
     })
-
-    vue.data.my.wife.name = '张xx'
-
+    vue.data.car.push('2')
     
 </script>
 </body>
