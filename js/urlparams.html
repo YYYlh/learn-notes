@@ -9,9 +9,11 @@
 <body>
     <script>
        const url = new URL(window.location)
+       let obj = {}
         for (const [key, value] of url.searchParams.entries()) {
-            console.log(key, value);
+            obj[key] = value
         }
+        console.log(obj)
     </script>
 </body>
 </html>

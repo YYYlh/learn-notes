@@ -17,12 +17,19 @@
         }
     }
     new Observer(vue.data)
-
     const w2 = new Watcher(vue, 'car', (n, o) => {
         console.log(n, o);
     })
-    vue.data.car.push('2')
-    
+    vue.data.car.push({name: '奥迪'})
+    const w1 = new Watcher(vue, (vm) => {
+        return vm.car[1].name
+    }, (n, o) => {
+        console.log(n, o);
+    })
+   
+   
+    vue.data.car[1].name = '奔驰'
+    vue
 </script>
 </body>
 </html>

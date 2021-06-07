@@ -10,6 +10,7 @@ export default class Observer {
         def(value, '__ob__', this)
         if (Array.isArray(value)) {
             value.__proto__ = arrayMethods
+            this.observerArray(value)
         } else {
             this.walk(value)
         }
@@ -21,19 +22,23 @@ export default class Observer {
             defineReactive(obj, keys[i], obj[keys[i]])
         }
     }
+
+    observerArray(items) {
+        for (let i = 0; i < items.length; i++) {
+            observer(items[i])
+        }
+    }
 }
 
 function defineReactive(data, key, val) {
-
-    if (typeof val === 'object') {
-        new Observer(val)
-    }
     let chidOb = observer(val)
+    let dep = new Dep()
 
     Object.defineProperty(data, key, {
         enumerable: true,
         configurable: true,
         get() {
+            dep.depend()
             if (chidOb) {
                 chidOb.dep.depend()
             }
@@ -48,6 +53,7 @@ function defineReactive(data, key, val) {
             if (chidOb) {
                 chidOb.dep.notify()
             }
+            dep.notify()
         }
     })
 }
